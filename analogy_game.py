@@ -22,6 +22,9 @@ def play_analogy_game():
     # Randomize the questions so it's a fresh game every time!
     random.shuffle(game_questions)
 
+    # Slice the list to limit the game to exactly 5 rounds!
+    game_questions = game_questions[:5]
+
     score = 0
     print("\n--- WELCOME TO THE SEMANTIC CHALLENGE ---")
     print("Format: 'A' is to 'B' as 'C' is to [?]")
