@@ -3,6 +3,13 @@ def generate_readme():
 
 Welcome to the **Semantic Analogy Engine**, a Natural Language Processing (NLP) project that uses high-dimensional word embeddings to solve linguistic analogies and challenge users in a game of semantic wit.
 
+## ✨ New Features
+
+* **Head-to-Head Mode:** Play against the AI! The machine calculates its own organic answers, and you both compete for the highest score to see who truly understands context better.
+* **Data-Driven Question Bank:** Questions are loaded dynamically from a separate `questions.csv` file containing 100 curated analogies across categories like Geography, Grammar, and Opposites.
+* **Instant-Load Caching:** Uses Gensim's `KeyedVectors` and memory mapping (`mmap`) to cache the 50-dimensional model locally, reducing load times to milliseconds after the first run.
+* **Dynamic AI Evaluation:** The AI's guesses are evaluated against human-curated target answers, proving that machines can still fall for synonym traps and dataset biases!
+
 ## 📖 The Theory: Word Embeddings & Vector Space
 
 At the heart of this project lies the concept of **Distributional Semantics**: the idea that a word's meaning is defined by the company it keeps.
@@ -34,19 +41,21 @@ $$\text{similarity}=\cos(\theta)=\frac{\vec{u}\cdot\vec{v}}{\|\vec{u}\|\|\vec{v}
 
 ## 🎮 How to Play
 
-1.  **The Prompt**: The AI presents three words: $A$, $B$, and $C$.
-2.  **The Goal**: You must provide the fourth word ($D$) that completes the relationship.
-3.  **Scoring**:
-    * **10 Points**: Exact Match.
-    * **5 Points**: Semantic Near-Miss (Similarity > 0.7).
-    * **0 Points**: Incorrect or word not in library.
-4.  **Speed**: Your time is tracked—challenge yourself to find the vector in under 2 seconds!
+### Game Modes
+1. **Solo Semantic Challenge:** Test your wits against the model in a classic 5-round challenge.
+2. **Head-to-Head:** Compete against the machine. The AI will make its own guess based on vector arithmetic, and you will both be graded against the human-curated target answer. 
 
-## 🛠️ Requirements
+### Scoring Logic
+* **10 Points**: Exact Match.
+* **5 Points**: Semantic Near-Miss (Similarity > 0.7).
+* **0 Points**: Incorrect or word not in library.
 
-- Python 3.8+
-- `gensim` library
-- `glove-wiki-gigaword-50` (auto-downloaded via the script)
+## 🛠️ Architecture & Requirements
+
+* **Python 3.8+**
+* **`gensim` library:** Handles the heavy lifting of the vector math.
+* **`glove-wiki-gigaword-50`:** Auto-downloaded and cached locally as `glove_model.kv` on the first run for instant subsequent startups.
+* **`questions.csv`:** Run `create_question_bank.py` first to generate the 100-question dataset.
 
 ---
 
@@ -56,7 +65,7 @@ $$\text{similarity}=\cos(\theta)=\frac{\vec{u}\cdot\vec{v}}{\|\vec{u}\|\|\vec{v}
     try:
         with open("README.md", "w", encoding="utf-8") as f:
             f.write(content)
-        print("✨ README.md has been manifested in your directory with perfect formatting!")
+        print("✨ README.md has been manifested in your directory with all the latest features!")
     except Exception as e:
         print(f"Alas! An error occurred: {e}")
 
