@@ -14,9 +14,11 @@ We utilize **GloVe (Global Vectors for Word Representation)**. Unlike traditiona
 The "magic" of the game—solving $A \text{ is to } B \text{ as } C \text{ is to } ?$—is rooted in **Linear Algebraic Cosine Similarity**. 
 
 The engine performs the following vector arithmetic:
+
 $$\vec{V}_{target}=\vec{V}_{B}-\vec{V}_{A}+\vec{V}_{C}$$
 
 For the classic example:
+
 $$\vec{V}_{king}-\vec{V}_{man}+\vec{V}_{woman}\approx\vec{V}_{queen}$$
 
 ### 3. Scoring via Cosine Similarity
