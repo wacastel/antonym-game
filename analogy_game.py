@@ -1,11 +1,29 @@
+import os
 import csv
 import time
 import random
 from gensim import downloader as api
+from gensim.models import KeyedVectors
+
+# Define a local file name for our optimized cache
+CACHE_FILE = "glove_model.kv"
+
+def load_knowledge_model():
+    """Loads the model instantly from cache, or builds the cache if it doesn't exist."""
+    if os.path.exists(CACHE_FILE):
+        print("\n⚡ Saraswati is instantly recalling the scrolls from local memory...")
+        # The mmap='r' argument is the magic wand! It loads instantly.
+        return KeyedVectors.load(CACHE_FILE, mmap='r')
+    else:
+        print("\n📚 Saraswati is opening the grand archives... (Building cache, this only happens once!)")
+        model = api.load("glove-wiki-gigaword-50")
+        model.save(CACHE_FILE)
+        print("✨ Knowledge cached locally! Future startups will be instantaneous.")
+        return model
 
 def play_analogy_game():
-    print("\nSaraswati is opening the scrolls... (Loading knowledge model)")
-    model = api.load("glove-wiki-gigaword-50")
+    # Replace the old api.load line with our new ultra-fast function
+    model = load_knowledge_model()
     
     # Load questions from the CSV
     game_questions = []
